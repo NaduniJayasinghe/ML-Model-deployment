@@ -1,0 +1,25 @@
+from flask import Flask, request
+import pickle 
+import numpy as np 
+
+local_classifier = pickle.load(open('classifier.pickle','rb'))
+local_scaler = pickle.load(open('sc.pickle','rb'))
+
+app = Flask(__name__)
+
+@app.route('/model', methods=['POST'])
+def hello_world():
+    request_data = request.get_json(force=True)
+    age = request_data['age']
+    salary = request_data['salary']
+    print(age)
+    print(salary)
+    
+    prediction = local_classifier.predict(local_scaler.transform(np.array([[age, salary]])))
+    predict_proba = local_classifier.predict_proba(local_scaler.transform(np.array([[age, salary]])))[0][1]
+
+    return f"Prediction: {prediction}, Probability of class 1: {predict_proba}"
+
+if __name__ == "__main__":
+    app.run(port=8005, debug=True)
+    
