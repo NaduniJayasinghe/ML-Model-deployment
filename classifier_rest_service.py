@@ -21,5 +21,5 @@ def hello_world():
     return f"Prediction: {prediction}, Probability of class 1: {predict_proba}"
 
 if __name__ == "__main__":
-    app.run(port=8005, debug=True)
+    app.run(port=8005, debug=True) 
     

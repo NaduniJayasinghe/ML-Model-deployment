@@ -1,8 +1,8 @@
 import json 
 import requests
 
-url = 'http://127.0.0.1:8005/model'
+url = 'https://keva-lifeful-semichemically.ngrok-free.dev/predict'
 
-request_data = json.dumps({'age':40, 'salary': 50000})
+request_data = json.dumps({'age':40, 'salary': 500000})
 response = requests.post(url, request_data)
 print(response.text)
